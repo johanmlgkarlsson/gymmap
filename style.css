@@ -1,0 +1,49 @@
+body { margin: 0px; }
+
+#settingsbutton {
+	background-color: #f4f4f4;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAkFBMVEUAAABEREAAAAAAAAAqKicAAAAAAAAICAcAAAAAAAANDQwAAAADAwMHBwYWFhQbGxkBAQEBAQEAAAAFBQQQEA8BAQEAAAACAgICAgIAAAAAAAABAQEDAwMMDAsdHRsAAAABAQEAAAABAQECAgIDAwIICAcBAQEDAwMBAQEFBQUAAAACAgICAgIBAQABAQEAAABs8vbKAAAAL3RSTlMAAvvdA/jzGLblEMY2IgkHllvSLwyP2E9L7KaEQxQFwX+wc2s8HXkpoizMP2O4nwvXHbgAAAMNSURBVEjHrZeJcqowFIZDEnYIO4gsIoJLbZv3f7tbBWMIAWvnnnEmjfDxn56NCIBy+yhLy9qV37GLj/j/7M/q4QeECV54uPQ7XDmfSYZHtkwOXYWl8nNfvNNhj1T64YD79dOOquZXG5FfsHVUhCr9MbjVwY9VPrzt1DRxyKtw920I6WDakQDgHfJxC9PGVVZZr9EoM5TFcZk+92pCVsONG0iflu73IeUs8VZTpQQqXTTY4tVUgTJfhrXsRbgvaBk2nRep0u1lOHTBQqo8PCh/LMOpo9zksKcIbN80n+VFv+zhSsAMRz9dg2PhTsNdtxpUc2R/MFZKh3aaq1AtCM+CKKRvGOr4VHmFRFFDtmHYSJN44Mec8mUubG6DSLcsPQq25lzaAYzFB7GuVGNjPaaItTFUUbqpWbgrQ/TY5xtIcX3R913/YIGDBF1fn1aS7gvaefn4p5VP4ZLhipXkCr7BIx5Y4CVCrDbKbF5thKid4zFROJvWxtaascDaTqslqEdlgJ2txkUrkI3pgLtD3XcDO0bkiJ5JjCQsiJ43mEU/6QxAMjasbJ1B0l5FQczAUTzes1hbEhZYBstxJQwxAZ6zCg+LrFeGT7dlrxbO7YyMX45sdUi5gElYPmCo1Z/KAJ/8/J1UaecIM7bciUUismKR2FkNhqYj8/IUdSXlObDzdjbEGStrjIdAZ85bkmclLblho6T6kgwDxgLJMLB7lircLo0hZWEMFR5LFYjSNwdgN3B390jy1uil37cKZvXppPQNM0ueVUijUqiZYbr+ukGhqUEKkxhMqttN/DZzXMeAK+zu6jrZIfFPrJ/GEiLDkc8Jl2F0vd/iEZbG917uAiA00Gn1WLHOguvLAw0PCJ6sHqUOyiqLj5CP0G6Hpoc4jp2HzCs4ZTOoqg1HQ59M2VnjFuihrRaxAkirsWclJ5kuv5DOH3C47++tfB526LuMgaAr+YUSO80uhzTshjsim8LcLjoLvGZvn7ovj+egHnY4Ozeb3pslFSz/QsFxzc7+MR7+WGLfXRj3d5Y59JflH38wB1JLkEADAAAAAElFTkSuQmCC);
+	background-size: 80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	left: 11px;
+	top: 80px;
+	position: absolute;
+	z-index: 999;
+}
+
+
+#statsbutton {
+	background-color: #f4f4f4;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU4H24AAAAG3RSTlMAvp4fX39T3gcPzsVo67Y/qJIV1q+Gc1c3LyedJguBAAAAk0lEQVQ4y+XR3QrCMAyG4dRmNrXTbvPf3P992mgQRlp2IiLsPdnY9zAKhV/1yATaNNXAhj1ouF0C2GnYAD1r7nvAHtKHBqAX0N0CGndRgOxdsCA65iKwlx0s8EdmEZe97BZcy/cg/3jvcMv5PgOlFOnALLtNwEAAIgaog3N5iDg1LgsXb/MPQHJa+ryNM1DJwYp6AvzDD3WkzqZWAAAAAElFTkSuQmCC);
+	background-size: 80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	left: 11px;
+	top: 121px;
+	position: absolute;
+	z-index: 999;
+	}
+    
+#mysettings, #stats {
+	background-color: #f4f4f4;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	width: calc(100% - 60px);
+	height: calc(100vh - 80px);
+	margin: 30px;
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	padding: 8px;
+	text-align: center;
+	display: none
+	}
