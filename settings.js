@@ -100,13 +100,57 @@ function importdata() {
         const reader = new FileReader();
         reader.onload = (e) => {
             let rows = e.target.result.split(/\n/);
+            let foundDuplicates = [];
+            let missingGyms = [];
+            let lowerXP = [];
             $(rows).each(function(i, row) {
                 let data = row.split(/\t/);
-                if (typeof names[data[0]] != 'undefined' ) {
-                    const id = names[data[0]].id;
-                    setBadgeXP(parseInt(data[1]), id)
+
+                // gym is a duplicate so we dont know what gym to apply the xp to
+                if (duplicates.includes(data[0])) {
+                    foundDuplicates.push(data[0] + ' (' + parseInt(data[1]) + ')');
+                    return;
                 }
+                
+                // gym does not exist
+                if (typeof names[data[0]] == 'undefined' ) {
+                    missingGyms.push(data[0] + ' (' + parseInt(data[1]) + ')');
+                    return;
+                }
+                    
+                const id = names[data[0]].id;
+                
+                // new info has lower xp that old
+                if (typeof save.gyms[id] !== 'undefined') {
+                    if (save.gyms[id].xp > parseInt(data[1])) {
+                        lowerXP.push(data[0] + ' ' + save.gyms[id].xp + ' => ' + parseInt(data[1]));
+                        return;
+                    }
+                }
+
+                setBadgeXP(parseInt(data[1]), id);
             });
+
+
+            let message = '';
+
+            if(foundDuplicates.length > 0) {
+                message = message + 'These gyms could not be decided by name:\n' + foundDuplicates.join('\n') + '\n\n\n';
+            }
+
+            if(missingGyms.length > 0) {
+                message = message + 'These gyms could not be found at all:\n' + missingGyms.join('\n') + '\n\n\n';
+            }
+
+            if(lowerXP.length > 0) {
+                message = message + 'These gyms had lower xp set in the import file:\n' + lowerXP.join('\n') + '\n\n\n';
+            }
+
+            if (message != '') {
+                alert(message);
+                console.log(message);
+            }
+            
             closesettings(false);
         };
         reader.readAsText(selectedFile);

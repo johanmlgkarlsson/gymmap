@@ -11,7 +11,6 @@ $('<div>').attr('id', 'statsbutton').appendTo('#map')
         for(var i in save.stats[settings['city']]) {
             var row = $('<tr>');
             $('<td>').text(i).appendTo(row);
-            console.log(save.stats[settings['city']][i]);
             $('<td>').text(save.stats[settings['city']][i]['totalXP'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")).appendTo(row);
             $('<td>').text(save.stats[settings['city']][i]['numberOfImportedGyms']).appendTo(row);
             $('<td>').text(save.stats[settings['city']][i]['numberOfGoldBadges']).appendTo(row);
