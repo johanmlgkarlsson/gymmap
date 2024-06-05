@@ -121,6 +121,9 @@ if (settings === null ) {
 $.get('defs/' + settings['city'] + '.json', function(res) {
 	$(res).each(function(i, row) {
 		let url = 'unknown.png';
+		if ( row.name === null ) {
+			continue;
+		}
 		if ( typeof save.gyms[row.id] !== 'undefined' && typeof save.gyms[row.id]['badge'] !== 'undefined' ) {
 			url = save.gyms[row.id]['badge'] + '.png';
 		}
@@ -149,7 +152,6 @@ $.get('defs/' + settings['city'] + '.json', function(res) {
 				'<img src="gold.png"  onclick="setBadgeXP(30000, \''+row.id+'\')"  style="max-width: 30px"; />' +
 				'</center>';
 		} else {
-console.log(row);
 			var html = '<center><strong style="font-size: 20px;">' + row.name + '</strong><br>'+
 				'<img src="' + row.url.replace(/^http:/, '') + '" style="width: 100px; height: 100px; background-size: cover; border-radius: 50px; margin: 6px;" />' +
 				'<br>' + 
