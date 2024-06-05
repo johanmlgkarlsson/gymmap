@@ -149,10 +149,11 @@ $.get('defs/' + settings['city'] + '.json', function(res) {
 				'<img src="gold.png"  onclick="setBadgeXP(30000, \''+row.id+'\')"  style="max-width: 30px"; />' +
 				'</center>';
 		} else {
+console.log(row);
 			var html = '<center><strong style="font-size: 20px;">' + row.name + '</strong><br>'+
 				'<img src="' + row.url.replace(/^http:/, '') + '" style="width: 100px; height: 100px; background-size: cover; border-radius: 50px; margin: 6px;" />' +
 				'<br>' + 
-                "<a style='position: relative; float: left; font-size: 20px;' onclick=\"jwindow.open('https://www.google.com/maps/dir/?api=1&destination="+row.lat+","+row.lon+"', '_blank'); return false;\">directions</a>" +
+                "<a style='position: relative; float: left; font-size: 20px;' onclick=\"window.open('https://www.google.com/maps/dir/?api=1&destination="+row.lat+","+row.lon+"', '_blank'); return false;\">directions</a>" +
                 "<a style='position: relative; float: right; font-size: 20px;' onclick=\"return hideMarker('"+row.id+"')\">hide</a>" +
             	'<br>' + 
                 '<br>' + 
