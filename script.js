@@ -122,7 +122,7 @@ $.get('defs/' + settings['city'] + '.json', function(res) {
 	$(res).each(function(i, row) {
 		let url = 'unknown.png';
 		if ( row.name === null ) {
-			continue;
+			return;
 		}
 		if ( typeof save.gyms[row.id] !== 'undefined' && typeof save.gyms[row.id]['badge'] !== 'undefined' ) {
 			url = save.gyms[row.id]['badge'] + '.png';
