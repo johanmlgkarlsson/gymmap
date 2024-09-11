@@ -138,9 +138,9 @@ $.get('defs/' + settings['city'] + '.json', function(res) {
 		if ( settings['mode'] == 'badgemode' ) {
 			var html = '<center><strong style="font-size: 20px;">' + row.name + '</strong><br>'+
 				'<center>'+
-				'<strong>B:</strong>' + row.bs + '/' + row.bc + '&nbsp;&nbsp;' +
-				'<strong>R:</strong>' + row.rs + '/' + row.yc + '&nbsp;&nbsp;' +
-				'<strong>Y:</strong>' + row.ys + '/' + row.yc + '&nbsp;&nbsp;' +
+				'<strong>B:</strong>' + row.bs + '<strong>/</strong>' + row.bc + '&nbsp;&nbsp;' +
+				'<strong>R:</strong>' + row.rs + '<strong>/</strong>' + row.yc + '&nbsp;&nbsp;' +
+				'<strong>Y:</strong>' + row.ys + '<strong>/</strong>' + row.yc + '&nbsp;&nbsp;' +
 				'</center><br>' +
 				'<img src="' + row.url.replace(/^http:/, '') + '" style="width: 100px; height: 100px; background-size: cover; border-radius: 50px; margin: 6px;" />' +
 				'<br>' +
@@ -159,9 +159,9 @@ $.get('defs/' + settings['city'] + '.json', function(res) {
 		} else {
 			var html = '<center><strong style="font-size: 20px;">' + row.name + '</strong><br>'+
 				'<center>'+
-				'<strong>B:</strong>' + row.bs + '/' + row.bc + '&nbsp;&nbsp;' +
-				'<strong>R:</strong>' + row.rs + '/' + row.yc + '&nbsp;&nbsp;' +
-				'<strong>Y:</strong>' + row.ys + '/' + row.yc + '&nbsp;&nbsp;' +
+				'<strong>B:</strong>' + row.bs + '<strong>/</strong>' + row.bc + '&nbsp;&nbsp;' +
+				'<strong>R:</strong>' + row.rs + '<strong>/</strong>' + row.yc + '&nbsp;&nbsp;' +
+				'<strong>Y:</strong>' + row.ys + '<strong>/</strong>' + row.yc + '&nbsp;&nbsp;' +
 				'</center><br>' +
 				'<img src="' + row.url.replace(/^http:/, '') + '" style="width: 100px; height: 100px; background-size: cover; border-radius: 50px; margin: 6px;" />' +
 				'<br>' +
