@@ -1,25 +1,43 @@
-function closesettings(reload) {
-	$("#mysettings").hide();
-	settings['city'] = $('#city').val();
-	settings['gymsettings'] = $('#gymsettings').val();
-	settings['mode'] = $('#mode').val();
-	localStorage.setItem('settings', JSON.stringify(settings));
+function closesettings() {
+    $("#mysettings").hide();
+    let reload = settings['city'] !== $('#city').val();
+    settings['city'] = $('#city').val();
+    settings['min-xp'] = $('#min-xp').val();
+    settings['max-xp'] = $('#max-xp').val();
+    settings['mode'] = $('#mode').val();
+    settings['team'] = $('#team').val();
+    settings['free-slots'] = $('#free-slots').val();
+    settings['takeover'] = 0;
+    if ($("#takeover").prop( "checked" ) ) {
+        settings['takeover'] = 1;
+    }
+    settings['min-time'] = $('#min-time').val();
+    settings['max-time'] = $('#max-time').val();
+    localStorage.setItem('settings', JSON.stringify(settings));
     
-	if (reload) {
-		location.reload();
-	}
+    if (reload) {
+        location.reload();
+        return;
+    }
+
+    for (const [gymID, gym] of Object.entries(markers)) {
+        gym.fire('refreshGym');
+    };
 };
 
-$('<div>').attr('id', 'settingsbutton').appendTo('#map')
-	.on('click', function() { $("#mysettings").css({display: 'grid'}) });
+$('<div>').attr('id', 'settingsbutton').appendTo('#map').on('click', () => { $("#mysettings").show() });
+$('<div>').attr('id', 'mysettings').addClass('container-fluid').appendTo('body');
 
-
-$('<div>').attr('id', 'mysettings').appendTo('body');
-$('<select>').attr('name', 'city').attr('id', 'city').appendTo('#mysettings');
-
+//city selection
+let r = $('<div>').addClass('row').appendTo('#mysettings');
+$('<div>').addClass('col-12').appendTo(r).text('City selection').css('font-weight', 'bold');
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('City');
+let c = $('<div>').addClass('col-8').appendTo(r);
+$('<select>').attr('name', 'city').attr('id', 'city').css('max-width', 'inherit').appendTo(c);
 $.get('defs/locations.csv', function(res) {
     const locations = res.split('\n');
-	for(i in locations) {
+    for(i in locations) {
         if (locations[i] != '' ) {
             $('<option>').attr('value', locations[i]).text(locations[i]).appendTo('#city');
         }
@@ -27,46 +45,110 @@ $.get('defs/locations.csv', function(res) {
     $('#city').val(settings['city']);
 });
 
-$('<p>').appendTo('#mysettings');
 
-$('<select>').attr('name', 'gymsettings').attr('id', 'gymsettings').appendTo('#mysettings');
-$('<option>').attr('value', 'showall').text('Show all').appendTo('#gymsettings');
-$('<option>').attr('value', 'onlygold').text('Only gold').appendTo('#gymsettings');
-$('<option>').attr('value', 'onlyneargold').text('Only near gold').appendTo('#gymsettings');
-$('<option>').attr('value', 'hidegold').text('Hide gold').appendTo('#gymsettings');
-$('<option>').attr('value', 'onlynew').text('Only new').appendTo('#gymsettings');
-$('<option>').attr('value', 'farfromgold').text('Far from gold').appendTo('#gymsettings');
-$('#gymsettings').val(settings['gymsettings']);
-$('<p>').appendTo('#mysettings');
+r = $('<div>').addClass('row').appendTo('#mysettings');
+$('<div>').addClass('col-12').appendTo(r).text('Display only gyms with..').css('font-weight', 'bold');
 
-$('<select>').attr('name', 'mode').attr('id', 'mode').appendTo('#mysettings');
+//min xp to show
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Min XP');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<input>').attr('type', 'number').attr('id', 'min-xp').appendTo(c).val(settings['min-xp']);
+
+//max xp to show
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Max XP');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<input>').attr('type', 'number').attr('id', 'max-xp').appendTo(c).val(settings['max-xp']);
+
+//min free slots
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Free slots');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<input>').attr('type', 'number').attr('id', 'free-slots').appendTo(c).val(settings['free-slots']);
+
+// also other colored teams
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+c = $('<div>').addClass('col-12').appendTo(r);
+$('<input />', { type: 'checkbox', id: 'takeover', value: 'takeover'}).appendTo(c).prop( "checked", settings['takeover'] == 1 );
+$('<span>&nbsp</span>').appendTo(c);
+$('<label />', { 'for': 'takeover', text: 'Also show gyms I can take over' }).appendTo(c);
+
+//min time
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Min time');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<input>').attr('type', 'number').attr('id', 'min-time').appendTo(c).val(settings['min-time']);
+
+//max time
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Max time');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<input>').attr('type', 'number').attr('id', 'max-time').appendTo(c).val(settings['max-time']);
+
+
+
+r = $('<div>').addClass('row').appendTo('#mysettings');
+$('<div>').addClass('col-12').appendTo(r).text('Setup').css('font-weight', 'bold');
+
+// mode
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Mode');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<select>').attr('name', 'mode').attr('id', 'mode').appendTo(c);
 $('<option>').attr('value', 'badgemode').text('Badge mode').appendTo('#mode');
 $('<option>').attr('value', 'xpmode').text('XP mode').appendTo('#mode');
 $('#mode').val(settings['mode']);
-$('<p>').appendTo('#mysettings');
 
-$('<button>').text('Make backup').appendTo('#mysettings').on('click', makebackup);
-$('<p>').appendTo('#mysettings');
+// team
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Team');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<select>').attr('name', 'team').attr('id', 'team').appendTo(c);
+$('<option>').attr('value', 'mystic').text('Mystic').appendTo('#team');
+$('<option>').attr('value', 'valor').text('Valor').appendTo('#team');
+$('<option>').attr('value', 'instinct').text('Instinct').appendTo('#team');
+$('#team').val(settings['team']);
 
-$('<input>').attr('type', 'file').attr('id', 'restorebackupfile').text('Select file').appendTo('#mysettings');
-$('<br>').appendTo('#mysettings');
-$('<button>').text('Restore backup').appendTo('#mysettings').on('click', restorebackup);
 
-$('<p>').appendTo('#mysettings');
 
-$('<input>').attr('type', 'file').attr('id', 'importdatafile').text('Select file').appendTo('#mysettings');
-$('<br>').appendTo('#mysettings');
-$('<button>').text('Import data').appendTo('#mysettings').on('click', importdata);
 
-$('<p>').appendTo('#mysettings');
-$('<button>').text('Close').appendTo('#mysettings').on('click', () => closesettings(true));
+r = $('<div>').addClass('row').appendTo('#mysettings');
+$('<div>').addClass('col-12').appendTo(r).text('Import/Export').css('font-weight', 'bold');
+
+// create backup
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Create backup');
+c = $('<div>').addClass('col-8').appendTo(r);
+$('<button>').text('Download').appendTo(c).on('click', makebackup);
+
+
+// restore backup
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Restore backup');
+c = $('<div>').addClass('col-6').appendTo(r);
+$('<input>').attr('type', 'file').attr('id', 'restorebackupfile').text('Select file').appendTo(c);
+c = $('<div>').addClass('col-2').appendTo(r);
+$('<button>').text('Upload').appendTo(c).on('click', restorebackup);
+
+// import data
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+$('<div>').addClass('col-4').appendTo(r).text('Import gymscan');
+c = $('<div>').addClass('col-6').appendTo(r);
+$('<input>').attr('type', 'file').attr('id', 'importdatafile').text('Select file').appendTo(c);
+c = $('<div>').addClass('col-2').appendTo(r);
+$('<button>').text('Import').appendTo(c).on('click', importdata);
+
+r = $('<div>').addClass('row mb-3').appendTo('#mysettings');
+c = $('<div>').addClass('col-12').appendTo(r);
+$('<button>').text('Close').appendTo(c).on('click', closesettings).css('width', '100%');
 
 
 
 function makebackup() {
-	$('<a>').attr('href', 'data:text/plain;charset=utf-8, ' + encodeURIComponent(JSON.stringify(save))).appendTo('body').attr('id', 'mysave').attr('download', 'backup.txt');
-	$('#mysave')[0].click();
-	$('#mysave').remove();
+    $('<a>').attr('href', 'data:text/plain;charset=utf-8, ' + encodeURIComponent(JSON.stringify(save))).appendTo('body').attr('id', 'mysave').attr('download', 'backup.txt');
+    $('#mysave')[0].click();
+    $('#mysave').remove();
 }
 
 function restorebackup() {
@@ -129,6 +211,7 @@ function importdata() {
                 }
 
                 setBadgeXP(parseInt(data[1]), id);
+                markers[id].fire('refreshGym');
             });
 
 
