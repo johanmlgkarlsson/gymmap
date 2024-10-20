@@ -1,4 +1,8 @@
-var map = L.map('map').setView([59.3, 18], 15); 
+var map = L.map('map');
+navigator.geolocation.getCurrentPosition(function(position) {
+    map.setView([position.coords.latitude, position.coords.longitude], 15);
+});
+
 var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam9oYW5tbGciLCJhIjoiY2xma2hmenR5MGIzMjNxbHFsc2didmtpNSJ9.-E57rIXCzVKCrJsSHbecLw', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -7,6 +11,13 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
+
+$('<div>').attr('id', 'locationbutton').appendTo('#map')
+	.on('click', function() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            map.setView([position.coords.latitude, position.coords.longitude], 15);
+        });       
+    });
 
 
 function getBadgeFromXP(xp) {

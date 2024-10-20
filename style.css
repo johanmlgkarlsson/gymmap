@@ -32,7 +32,23 @@ body { margin: 0px; }
 	position: absolute;
 	z-index: 999;
 	}
-    
+
+#locationbutton {
+	background-color: #f4f4f4;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMjkyZDMyIj48cGF0aCBkPSJtMTIgMjAuMjVjLTQuNTUgMC04LjI1LTMuNy04LjI1LTguMjVzMy43LTguMjUgOC4yNS04LjI1IDguMjUgMy43IDguMjUgOC4yNS0zLjcgOC4yNS04LjI1IDguMjV6bTAtMTVjLTMuNzIgMC02Ljc1IDMuMDMtNi43NSA2Ljc1czMuMDMgNi43NSA2Ljc1IDYuNzUgNi43NS0zLjAzIDYuNzUtNi43NS0zLjAzLTYuNzUtNi43NS02Ljc1eiIvPjxwYXRoIGQ9Im0xMiAxNS43NWMtMi4wNyAwLTMuNzUtMS42OC0zLjc1LTMuNzVzMS42OC0zLjc1IDMuNzUtMy43NSAzLjc1IDEuNjggMy43NSAzLjc1LTEuNjggMy43NS0zLjc1IDMuNzV6bTAtNmMtMS4yNCAwLTIuMjUgMS4wMS0yLjI1IDIuMjVzMS4wMSAyLjI1IDIuMjUgMi4yNSAyLjI1LTEuMDEgMi4yNS0yLjI1LTEuMDEtMi4yNS0yLjI1LTIuMjV6Ii8+PHBhdGggZD0ibTEyIDQuNzVjLS40MSAwLS43NS0uMzQtLjc1LS43NXYtMmMwLS40MS4zNC0uNzUuNzUtLjc1cy43NS4zNC43NS43NXYyYzAgLjQxLS4zNC43NS0uNzUuNzV6Ii8+PHBhdGggZD0ibTQgMTIuNzVoLTJjLS40MSAwLS43NS0uMzQtLjc1LS43NXMuMzQtLjc1Ljc1LS43NWgyYy40MSAwIC43NS4zNC43NS43NXMtLjM0Ljc1LS43NS43NXoiLz48cGF0aCBkPSJtMTIgMjIuNzVjLS40MSAwLS43NS0uMzQtLjc1LS43NXYtMmMwLS40MS4zNC0uNzUuNzUtLjc1cy43NS4zNC43NS43NXYyYzAgLjQxLS4zNC43NS0uNzUuNzV6Ii8+PHBhdGggZD0ibTIyIDEyLjc1aC0yYy0uNDEgMC0uNzUtLjM0LS43NS0uNzVzLjM0LS43NS43NS0uNzVoMmMuNDEgMCAuNzUuMzQuNzUuNzVzLS4zNC43NS0uNzUuNzV6Ii8+PC9nPjwvc3ZnPg==);
+	background-size: 80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	right: 11px;
+	bottom: 22px;
+	position: absolute;
+	z-index: 999;
+}
+
 #mysettings, #stats {
 	background-color: #f4f4f4;
 	border-radius: 2px;
