@@ -43,8 +43,8 @@ body { margin: 0px; }
 	background-repeat: no-repeat;
 	width: 30px;
 	height: 30px;
-	right: 11px;
-	bottom: 22px;
+	right: 0%;
+	top: 80%;
 	position: absolute;
 	z-index: 999;
 }
